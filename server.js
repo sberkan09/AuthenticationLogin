@@ -15,12 +15,11 @@ const users = [
 ];
 
 app.post('/login', (req, res) => {
-  console.log('request');
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
 
   if (user) {
-    const token = jwt.sign({ userId: user.id }, 'yourSecretKey', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, '123456789', { expiresIn: '1h' });
     res.json({ token });
   } else {
     res.status(401).send('Username or password is incorrect');
