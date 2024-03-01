@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const cors = require('cors');
 
+const read = require('./reader').read;
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -30,6 +32,11 @@ app.get('/ping', (req, res) => {
   res.json({
     message: "Ping successful"
   });
+});
+
+app.get('/Login.html', (req, res) => {
+  res.type('html');
+  res.send(read());
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
