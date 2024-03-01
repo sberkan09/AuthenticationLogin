@@ -1,7 +1,6 @@
 const fs = require('fs');
-const path = './Login.html';
 
-const read = () => {
+const read = (path) => {
     try {
         const data = fs.readFileSync(path);
         return data;

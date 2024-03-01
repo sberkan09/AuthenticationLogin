@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const read = require('./reader').read;
+const authenticateToken = require('./auth').authenticateToken;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,9 +35,20 @@ app.get('/ping', (req, res) => {
   });
 });
 
-app.get('/Login.html', (req, res) => {
+app.get('/', (req, res) => {
   res.type('html');
-  res.send(read());
+  res.send(read('./Login.html'));
+});
+
+app.get('/profile', (req, res) => {
+  res.type('html');
+  res.send(read('./Profile.html'));
+});
+
+app.get('/auth', authenticateToken, (req, res) => {
+  res.send({
+    success: true
+  });
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

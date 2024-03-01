@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <label for="label" id="1"></label>
+    <script>
+        function postRedirect() {
+            const token = localStorage.getItem('token');
+
+            fetch('/auth', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+                    'Content-Type': 'application/json',
+                },
+                })
+                .then(response => {
+                if (response.ok) {
+                    document.getElementById('1').innerText = 'Success';
+                } else {
+                    document.getElementById('1').innerText = 'Fail';
+                }
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('There has been a problem with your fetch operation:', error));
+        }
+        postRedirect();
+    </script>
+</body>
+</html>
