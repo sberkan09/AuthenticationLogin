@@ -26,4 +26,10 @@ app.post('/login', (req, res) => {
   }
 });
 
+app.get('/ping', (req, res) => {
+  res.json({
+    message: "Ping successful"
+  });
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
